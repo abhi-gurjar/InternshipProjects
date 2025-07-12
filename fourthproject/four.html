@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weight Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="converter-box">
+      <h2>Weight Converter</h2>
+      <label><strong>Pounds:</strong></label>
+      <input type="text" id="pounds" placeholder="Enter number" oninput="convertWeight()">
+      <p>Your weight in kg is: <span id="result"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function convertWeight() {
+      const pounds = document.getElementById('pounds').value.trim();
+      const resultElement = document.getElementById('result');
+      
+      if (!isNaN(pounds) && pounds !== "") {
+        const kg = (parseFloat(pounds) * 0.453592).toFixed(2);
+        resultElement.innerText = kg;
+      } else {
+        resultElement.innerText = "";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+

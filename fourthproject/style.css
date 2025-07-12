@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #d2f17b, #8ee4f7, #e1fda1);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.converter-box {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.converter-box h2 {
+  color: #008080;
+  margin-bottom: 20px;
+}
+
+.converter-box label {
+  font-weight: bold;
+  color: #333;
+}
+
+.converter-box input {
+  padding: 8px 12px;
+  width: 200px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.converter-box p {
+  margin-top: 15px;
+  color: #555;
+}
