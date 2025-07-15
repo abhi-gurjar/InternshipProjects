@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Step Progress Bar </title>
+    <style>
+      * {
+        box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffeb3b;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    .container {
+      width: 50%;
+      min-width: 300px;
+      text-align: center;
+      /* border: 1px solid red; */
+    }
+    
+    .progress-container {
+      /* border: 1px solid red; */
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .progress-line {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: lightgray;
+      z-index: 1;
+    }
+
+    .progress-line::before {
+      content: '';
+      position: absolute;
+      height: 4px;
+      left: 0;
+    
+      background-color: green;
+      width: 0%;
+      transition: width 0.3s ease;
+      z-index: 2;
+    }
+
+    .step {
+      z-index: 3;
+      position: relative;
+      background-color: #fff;
+      border: 3px solid lightgray;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      border-color: green;
+      color: green;
+    }
+
+    .label-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      /* border: 1px solid red; */
+      margin-top: -30px;
+    }
+
+    .label {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      background-color: #673ab7;
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="progress-container" id="progress-container">
+    <div class="progress-line" id="progress-line"></div>
+    <div class="step active">✔</div>
+    <div class="step">✕</div>
+    <div class="step">✕</div>
+    <div class="step">✕</div>
+    <div class="step">✕</div>
+  </div>
+  <div class="label-container">
+    <div class="label">Start</div>
+    <div class="label">Step 1</div>
+    <div class="label">Step 2</div>
+    <div class="label">Step 3</div>
+    <div class="label">Step 4</div>
+  </div>
+  <br>
+  <div class="buttons">
+    <button id="prevBtn">&#8592;</button>
+    <button id="nextBtn">&#8594;</button>
+  </div>
+</div>
+
+<script>
+  const steps = document.querySelectorAll('.step');
+  const progressLine = document.querySelector('.progress-line::before');
+  const line = document.querySelector('.progress-line');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let current = 1;
+
+  function updateSteps() {
+    steps.forEach((step, idx) => {
+      if (idx < current) {
+        step.classList.add('active');
+        step.textContent = '✔';
+      } else {
+        step.classList.remove('active');
+        step.textContent = '✕';
+      }
+    });
+
+    const lineFill = document.styleSheets[0].cssRules;
+    for (let i = 0; i < lineFill.length; i++) {
+      const rule = lineFill[i];
+      if (rule.selectorText === '.progress-line::before') {
+        const percent = ((current - 1) / (steps.length - 1)) * 100;
+        rule.style.width = percent + '%';
+      }
+    }
+
+    prevBtn.disabled = current === 1;
+    nextBtn.disabled = current === steps.length;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (current < steps.length) {
+      current++;
+      updateSteps();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (current > 1) {
+      current--;
+      updateSteps();
+    }
+  });
+
+  updateSteps();
+</script>
+
+</body>
+</html>
