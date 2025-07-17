@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f26c63;
+  font-family: 'Comic Sans MS', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ffb6c1;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  width: 400px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 18px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  resize: none;
+  margin-bottom: 20px;
+}
+
+.counter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+#total {
+  color: #7f50ff;
+  font-weight: bold;
+}
+
+#remaining {
+  color: #ff5722;
+  font-weight: bold;
+}
